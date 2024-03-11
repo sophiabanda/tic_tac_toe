@@ -28,7 +28,6 @@ let turn;
 let winner;
 let playerX = [];
 let playerO = [];
-console.log('players arrays: ', playerO, playerX);
 
 //CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------
 const gameBoard = document.getElementById('board');
@@ -91,15 +90,29 @@ function handleChoice(event) {
     playerX.push(currentChoice);
     document.getElementById(currentChoice).innerText = `${players[1]}`;
     //check player x against winning combos
+    if(playerX.length >= 3) {
+      for (let i = 0; i < winningCombinations.length; i++) {
+       let combo = winningCombinations[i];
+       let compare = (playerX, combo) => combo.every(c => playerX.includes(c));
+       console.log(compare)
+      }
+    }
   } else {
     playerO.push(currentChoice);
     document.getElementById(currentChoice).innerText = `${players[-1]}`;
+    if(playerO.length >= 3) {
+      for (let i = 0; i < winningCombinations.length; i++) {
+       let combo = winningCombinations[i];
+       let compare = (playerO, combo) => combo.every(c => playerO.includes(c));
+       console.log(compare)
+      }
+    }
     //check player x against winning combos
   }
   //handle turn
   turn *= -1
   console.log(turn);
-console.log('players arrays: ', playerO, playerX);
+  console.log('players arrays: ', playerO, playerX);
 
   // console.log(choiceSquare);
 }
