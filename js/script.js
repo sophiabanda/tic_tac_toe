@@ -1,6 +1,6 @@
 //CONSTANTS ----------------------CONSTANTS ----------------------CONSTANTS ----------------------CONSTANTS ------------------------
 const players = {
-  1: 'X',
+  '1': 'X',
   '-1': 'O',
   null: 'white',
 };
@@ -18,7 +18,7 @@ const winningCombinations = [
 
 const COLORS = {
   null: 'white',
-  1: 'gray',
+  '1': 'gray',
   '-1': 'black',
 };
 
@@ -26,6 +26,9 @@ const COLORS = {
 let board;
 let turn;
 let winner;
+let playerX = [];
+let playerO = [];
+console.log('players arrays: ', playerO, playerX);
 
 //CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------
 const gameBoard = document.getElementById('board');
@@ -47,7 +50,6 @@ console.log('cells: ', cells);
 // Isn't the click going to set the index?
 
 //EVENT LISTENERS-------------------EVENT LISTENERS-------------------EVENT LISTENERS-------------------EVENT LISTENERS----------------
-
 cells.forEach(function (cell) {
   cell.addEventListener('click', handleChoice);
   console.log('cell: ', cell);
@@ -63,7 +65,7 @@ function initializeGame() {
     [null, null, null], //col 2
   ];
   winner = players[null];
-  turn = players[1];
+  turn = 1;
 
   renderBoard();
   renderMessage();
@@ -77,11 +79,29 @@ function renderBoard() {
   });
 }
 
+//add fill class, add x, o
 function handleChoice(event) {
-  console.log(event.target);
-  let currentChoice = event.target;
-
   if (event.target.className !== 'cell') return;
+  let choiceSquare = event.target;
+  let currentChoice = event.target.id;
+  if (choiceSquare.classList.contains('filled')) return;
+  //check if class filled is present, if so, return
+  choiceSquare.classList.add('filled');
+  if (turn === 1) {
+    playerX.push(currentChoice);
+    document.getElementById(currentChoice).innerText = `${players[1]}`;
+    //check player x against winning combos
+  } else {
+    playerO.push(currentChoice);
+    document.getElementById(currentChoice).innerText = `${players[-1]}`;
+    //check player x against winning combos
+  }
+  //handle turn
+  turn *= -1
+  console.log(turn);
+console.log('players arrays: ', playerO, playerX);
+
+  // console.log(choiceSquare);
 }
 
 function renderMessage() {
