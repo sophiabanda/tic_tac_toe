@@ -1,0 +1,84 @@
+.permanent-marker-regular {
+  font-family: 'Permanent Marker', cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  /*:root is a psuedo class selector. root represents the <html> element and 
+  is identical to the selector html, except that its specificity is higher.*/
+  --cell-size: 100px;
+  --mark-size: calc((var(--cell-size) * 0.9));
+  /*calc is used to calculate a new value for the mark size value*/
+}
+
+* {
+  font-family: 'Permanent Marker', cursive;
+  border: 1px solid red;
+}
+
+.container {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+#game-status {
+  border: 2px solid;
+  margin: 40px auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
+
+.board {
+  width: 100vw;
+  height: 50vw;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+
+#board {
+  font-size: 70px;
+  text-align: center;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color: white;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:first-child,
+.cell:nth-child(4),
+.cell:nth-child(7) {
+  border-left: none;
+}
+
+.cell:last-child,
+.cell:nth-child(3),
+.cell:nth-child(6) {
+  border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8) {
+  border-bottom: none;
+}
+
+/*
+I refered to this video https://www.youtube.com/watch?v=Y-GkMjUZsmM&t=751s
+for the CSS. 
+*/
