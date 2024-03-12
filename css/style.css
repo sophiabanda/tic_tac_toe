@@ -14,12 +14,11 @@
 
 * {
   font-family: 'Permanent Marker', cursive;
-  border: 1px solid red;
 }
 
 .container {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column;
 }
 
 #game-status {
@@ -39,6 +38,16 @@
   justify-items: center;
   align-items: center;
   grid-template-columns: repeat(3, auto);
+}
+.winning-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  font-size: 25px;
+  align-self: center;
+  margin-top: 50px;
 }
 
 #board {

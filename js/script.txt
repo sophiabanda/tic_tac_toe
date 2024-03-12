@@ -1,0 +1,28 @@
+//Solution attempt 1:
+
+if (playerX.length >= 3) {
+      for (let i = 0; i < winningCombinations.length; i++) {
+        let combo = winningCombinations[i];
+        let compare = (playerX, combo) =>
+          combo.every((c) => playerX.includes(c));
+        console.log('x array:', playerX);
+        if ((compare = true)) {
+          winner = players[1];
+          console.log('winner', winner);
+        }
+      }
+    }
+
+ if (playerO.length >= 3) {
+      for (let i = 0; i < winningCombinations.length; i++) {
+        let combo = winningCombinations[i];
+        let compare = (playerO, combo) =>
+          combo.every((c) => playerO.includes(c));
+        console.log('o array:', playerO);
+
+        if ((compare = true)) {
+          winner = players[-1];
+          console.log('winner', winner);
+        }
+      }
+    }

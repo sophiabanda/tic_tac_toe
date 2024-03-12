@@ -1,6 +1,6 @@
 //CONSTANTS ----------------------CONSTANTS ----------------------CONSTANTS ----------------------CONSTANTS ------------------------
 const players = {
-  '1': 'X',
+  1: 'X',
   '-1': 'O',
   null: 'white',
 };
@@ -18,7 +18,7 @@ const winningCombinations = [
 
 const COLORS = {
   null: 'white',
-  '1': 'gray',
+  1: 'gray',
   '-1': 'black',
 };
 
@@ -28,6 +28,7 @@ let turn;
 let winner;
 let playerX = [];
 let playerO = [];
+let gameRunning = false;
 
 //CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------
 const gameBoard = document.getElementById('board');
@@ -35,7 +36,6 @@ const resetButton = document.getElementById('reset-button');
 const gameStatus = document.getElementById('game-status');
 gameStatus.style.fontSize = '40px';
 const cells = Array.from(document.querySelectorAll('.cell'));
-console.log('cells: ', cells);
 
 // const sq1 = document.getElementById('0');
 // const sq2 = document.getElementById('1');
@@ -51,8 +51,13 @@ console.log('cells: ', cells);
 //EVENT LISTENERS-------------------EVENT LISTENERS-------------------EVENT LISTENERS-------------------EVENT LISTENERS----------------
 cells.forEach(function (cell) {
   cell.addEventListener('click', handleChoice);
-  console.log('cell: ', cell);
 });
+
+document
+  .getElementById('reset-button')
+  .addEventListener('click', initializeGame());
+
+document.getElementById('reset-button').addEventListener('click', restartGame);
 
 //FUNCTIONS------------------FUNCTIONS------------------FUNCTIONS------------------FUNCTIONS------------------FUNCTIONS---------------
 initializeGame();
@@ -63,59 +68,63 @@ function initializeGame() {
     [null, null, null], //col 1
     [null, null, null], //col 2
   ];
-  winner = players[null];
+  winner = null;
   turn = 1;
 
-  renderBoard();
   renderMessage();
 }
 
-function renderBoard() {
-  board.forEach(function (column) {
-    column.forEach(function (col, idx) {
-      // console.log('idx: ', idx, 'col: ', col);
-    });
-  });
-}
-
-//add fill class, add x, o
 function handleChoice(event) {
   if (event.target.className !== 'cell') return;
+
   let choiceSquare = event.target;
+  console.log('choice square:', choiceSquare);
   let currentChoice = event.target.id;
+  console.log('currentChoice', currentChoice);
+
   if (choiceSquare.classList.contains('filled')) return;
-  //check if class filled is present, if so, return
   choiceSquare.classList.add('filled');
+  if (winner) return;
+
   if (turn === 1) {
     playerX.push(currentChoice);
     document.getElementById(currentChoice).innerText = `${players[1]}`;
-    //check player x against winning combos
-    if(playerX.length >= 3) {
-      for (let i = 0; i < winningCombinations.length; i++) {
-       let combo = winningCombinations[i];
-       let compare = (playerX, combo) => combo.every(c => playerX.includes(c));
-       console.log(compare)
-      }
-    }
+  }
+
+  if (turn === 1) {
   } else {
     playerO.push(currentChoice);
     document.getElementById(currentChoice).innerText = `${players[-1]}`;
-    if(playerO.length >= 3) {
-      for (let i = 0; i < winningCombinations.length; i++) {
-       let combo = winningCombinations[i];
-       let compare = (playerO, combo) => combo.every(c => playerO.includes(c));
-       console.log(compare)
-      }
-    }
-    //check player x against winning combos
   }
-  //handle turn
-  turn *= -1
-  console.log(turn);
-  console.log('players arrays: ', playerO, playerX);
 
-  // console.log(choiceSquare);
+  //handle turn
+  turn *= -1;
+  checkWinner();
+  console.log(winner);
 }
+
+function checkWinner() {
+  for (let i = 0; i < winningCombinations.length; i++) {
+    let combo = winningCombinations[i];
+    if (playerX.sort().join(',') === combo.sort().join(',')) {
+      winner = players[1];
+    } else if (playerO.sort().join(',') === combo.sort().join(',')) {
+      winner = players[-1];
+    }
+  }
+  let isTie;
+  for (let row of board) {
+    if (row.includes(null)) {
+      isTie = false;
+      break;
+    }
+  }
+  if (isTie) {
+    winner = 'T'; // 'T' represents a tie
+  }
+}
+
+function restartGame() {}
 
 function renderMessage() {
   if (winner === 'T') {
@@ -126,5 +135,3 @@ function renderMessage() {
     gameStatus.innerText = `It's ${turn}'s turn`;
   }
 }
-
-function render() {}
