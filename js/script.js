@@ -112,16 +112,9 @@ function checkWinner() {
       winner = players[-1];
     }
   }
-  let isTie;
-  for (let row of board) {
-    if (row.includes(null)) {
-      isTie = false;
-      break;
-    }
-  }
-  if (isTie) {
-    winner = 'T'; // 'T' represents a tie
-  }
+  //tie logic
+
+  //winner logic
 }
 
 function restartGame() {}
@@ -132,6 +125,10 @@ function renderMessage() {
   } else if (winner) {
     gameStatus.innerText = `${winner} is the winner!`;
   } else {
-    gameStatus.innerText = `It's ${turn}'s turn`;
+    if (turn === 1) {
+      gameStatus.innerText = `It's ${players[1]} turn`;
+    } else if (turn === -1) {
+      gameStatus.innerText = `It's ${players[-1]} turn`;
+    }
   }
 }
