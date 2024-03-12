@@ -122,11 +122,13 @@ function restartGame() {}
 function renderMessage() {
   if (winner === 'T') {
     gameStatus.innerText = `It's a tie!`;
-  } else if (winner) {
-    gameStatus.innerText = `${winner} is the winner!`;
-  } else if (turn === 1) {
-    gameStatus.innerText = `It's ${players[1]}'s turn`;
   } else {
+    gameStatus.innerText = `${winner} is the winner!`;
+  }
+  //changing turn is not working
+  if (turn === 1) {
+    gameStatus.innerText = `It's ${players[1]}'s turn`;
+  } else if (turn === -1) {
     gameStatus.innerText = `It's ${players[-1]}'s turn`;
   }
 }
