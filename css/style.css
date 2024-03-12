@@ -27,6 +27,7 @@
   width: 50%;
   padding: 10px;
   text-align: center;
+  box-shadow: 5px 5px 5px gray;
 }
 
 .board {
@@ -44,10 +45,12 @@
   justify-content: center;
   align-items: center;
 }
+
 button {
   font-size: 25px;
   align-self: center;
   margin-top: 50px;
+  box-shadow: 5px 5px 5px gray;
 }
 
 #board {
