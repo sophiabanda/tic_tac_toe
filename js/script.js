@@ -124,7 +124,9 @@ function renderMessage() {
     gameStatus.innerText = `It's a tie!`;
   } else if (winner) {
     gameStatus.innerText = `${winner} is the winner!`;
-  } else if (turn === players[1]) {
+  } else if (turn === 1) {
+    gameStatus.innerText = `It's ${players[1]}'s turn`;
   } else {
+    gameStatus.innerText = `It's ${players[-1]}'s turn`;
   }
 }
