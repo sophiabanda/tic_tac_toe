@@ -1,6 +1,6 @@
 //CONSTANTS ----------------------CONSTANTS ----------------------CONSTANTS ----------------------CONSTANTS ------------------------
 const players = {
-  1: 'X',
+  '1': 'X',
   '-1': 'O',
   null: 'white',
 };
@@ -16,19 +16,13 @@ const winningCombinations = [
   [6, 4, 2],
 ];
 
-const COLORS = {
-  null: 'white',
-  1: 'gray',
-  '-1': 'black',
-};
-
 //STATE VARIABLES------------------STATE VARIABLES------------------STATE VARIABLES------------------STATE VARIABLES------------------
 let board;
 let turn;
 let winner;
 let playerX = [];
 let playerO = [];
-let gameRunning = false;
+
 
 //CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------
 const gameBoard = document.getElementById('board');
@@ -36,17 +30,8 @@ const resetButton = document.getElementById('reset-button');
 const gameStatus = document.getElementById('game-status');
 gameStatus.style.fontSize = '40px';
 const cells = Array.from(document.querySelectorAll('.cell'));
-
-// const sq1 = document.getElementById('0');
-// const sq2 = document.getElementById('1');
-// const sq3 = document.getElementById('2');
-// const sq4 = document.getElementById('3');
-// const sq5 = document.getElementById('4');
-// const sq6 = document.getElementById('5');
-// const sq7 = document.getElementById('6');
-// const sq8 = document.getElementById('7');
-// const sq9 = document.getElementById('8');
-// Isn't the click going to set the index?
+const squares = document.querySelectorAll('#board > div');
+const square = Array.from(squares)
 
 //EVENT LISTENERS-------------------EVENT LISTENERS-------------------EVENT LISTENERS-------------------EVENT LISTENERS----------------
 cells.forEach(function (cell) {
@@ -55,9 +40,7 @@ cells.forEach(function (cell) {
 
 document
   .getElementById('reset-button')
-  .addEventListener('click', initializeGame());
-
-document.getElementById('reset-button').addEventListener('click', restartGame);
+  .addEventListener('click', initializeGame);
 
 //FUNCTIONS------------------FUNCTIONS------------------FUNCTIONS------------------FUNCTIONS------------------FUNCTIONS---------------
 initializeGame();
@@ -70,17 +53,21 @@ function initializeGame() {
   ];
   winner = null;
   turn = 1;
-
-  renderMessage();
+  playerO = [];
+  playerX = [];
+  gameStatus.innerText = `Let's begin!`;
+  square.map((s) => {
+    s.classList.remove('filled');
+    s.innerText = ''
+  })
+  //set innertext to null for chosen squares & classlist
 }
 
 function handleChoice(event) {
   if (event.target.className !== 'cell') return;
 
   let choiceSquare = event.target;
-  console.log('choice square:', choiceSquare);
   let currentChoice = event.target.id;
-  console.log('currentChoice', currentChoice);
 
   if (choiceSquare.classList.contains('filled')) return;
   choiceSquare.classList.add('filled');
@@ -89,9 +76,6 @@ function handleChoice(event) {
   if (turn === 1) {
     playerX.push(currentChoice);
     document.getElementById(currentChoice).innerText = `${players[1]}`;
-  }
-
-  if (turn === 1) {
   } else {
     playerO.push(currentChoice);
     document.getElementById(currentChoice).innerText = `${players[-1]}`;
@@ -100,7 +84,8 @@ function handleChoice(event) {
   //handle turn
   turn *= -1;
   checkWinner();
-  console.log(winner);
+  renderMessage();
+  console.log('winner:', winner);
 }
 
 function checkWinner() {
@@ -112,21 +97,20 @@ function checkWinner() {
       winner = players[-1];
     }
   }
+  console.log('player x', playerX)
+  console.log('player o', playerO)
+  //not working when we go above a certain number of turns
+
+
   //tie logic
 
   //winner logic
+  //add message here for winner
 }
 
-function restartGame() {}
-
 function renderMessage() {
-  if (winner === 'T') {
-    gameStatus.innerText = `It's a tie!`;
-  } else {
-    gameStatus.innerText = `${winner} is the winner!`;
-  }
-  //changing turn is not working
-  if (turn === 1) {
+  console.log('turn', turn)
+  if (turn === 1 && !winner) {
     gameStatus.innerText = `It's ${players[1]}'s turn`;
   } else if (turn === -1) {
     gameStatus.innerText = `It's ${players[-1]}'s turn`;
