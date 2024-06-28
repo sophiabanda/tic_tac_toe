@@ -1,8 +1,8 @@
-.permanent-marker-regular {
+/* .permanent-marker-regular {
   font-family: 'Permanent Marker', cursive;
   font-weight: 400;
   font-style: normal;
-}
+} */
 
 :root {
   /*:root is a psuedo class selector. root represents the <html> element and 
@@ -23,7 +23,7 @@
 
 #game-status {
   border: 2px solid;
-  margin: 40px auto;
+  margin: 50px auto;
   width: 50%;
   padding: 10px;
   text-align: center;
@@ -31,14 +31,13 @@
 }
 
 .board {
-  width: 100vw;
-  height: 50vw;
   display: grid;
   justify-content: center;
   align-content: center;
   justify-items: center;
   align-items: center;
   grid-template-columns: repeat(3, auto);
+  text-align: center;
 }
 .winning-message {
   display: flex;
@@ -52,11 +51,7 @@ button {
   margin-top: 50px;
   box-shadow: 5px 5px 5px gray;
   background-color: white;
-}
-
-#board {
-  font-size: 70px;
-  text-align: center;
+  border: 2px solid;
 }
 
 .cell {

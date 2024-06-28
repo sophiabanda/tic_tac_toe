@@ -2,7 +2,7 @@
 const players = {
   '1': 'X',
   '-1': 'O',
-  null: 'white',
+  'null': 'white',
 };
 
 const winningCombinations = [
@@ -23,7 +23,6 @@ let winner;
 let playerX = [];
 let playerO = [];
 
-
 //CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------CACHED ELEMENTS------------------
 const gameBoard = document.getElementById('board');
 const resetButton = document.getElementById('reset-button');
@@ -31,7 +30,7 @@ const gameStatus = document.getElementById('game-status');
 gameStatus.style.fontSize = '40px';
 const cells = Array.from(document.querySelectorAll('.cell'));
 const squares = document.querySelectorAll('#board > div');
-const square = Array.from(squares)
+const square = Array.from(squares);
 
 //EVENT LISTENERS-------------------EVENT LISTENERS-------------------EVENT LISTENERS-------------------EVENT LISTENERS----------------
 cells.forEach(function (cell) {
@@ -58,8 +57,8 @@ function initializeGame() {
   gameStatus.innerText = `Let's begin!`;
   square.map((s) => {
     s.classList.remove('filled');
-    s.innerText = ''
-  })
+    s.innerText = '';
+  });
   //set innertext to null for chosen squares & classlist
 }
 
@@ -88,28 +87,8 @@ function handleChoice(event) {
   console.log('winner:', winner);
 }
 
-function checkWinner() {
-  for (let i = 0; i < winningCombinations.length; i++) {
-    let combo = winningCombinations[i];
-    if (playerX.sort().join(',') === combo.sort().join(',')) {
-      winner = players[1];
-    } else if (playerO.sort().join(',') === combo.sort().join(',')) {
-      winner = players[-1];
-    }
-  }
-  console.log('player x', playerX)
-  console.log('player o', playerO)
-  //not working when we go above a certain number of turns
-
-
-  //tie logic
-
-  //winner logic
-  //add message here for winner
-}
-
 function renderMessage() {
-  console.log('turn', turn)
+  console.log('turn', turn);
   if (turn === 1 && !winner) {
     gameStatus.innerText = `It's ${players[1]}'s turn`;
   } else if (turn === -1) {
