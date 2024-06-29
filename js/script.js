@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 //CONSTANTS ----------------------CONSTANTS ----------------------CONSTANTS ----------------------CONSTANTS ------------------------
 const players = {
   '1': 'X',
@@ -17,6 +19,11 @@ const winningCombinations = [
 ];
 
 //STATE VARIABLES------------------STATE VARIABLES------------------STATE VARIABLES------------------STATE VARIABLES------------------
+
+export default function Board() {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+}
+
 let board;
 let turn;
 let winner;

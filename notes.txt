@@ -1,6 +1,0 @@
--- data-* attribute: 
-The data-* attribute is used to store custom data private to the page or application.
-The data-* attribute gives us the ability to embed custom data attributes on all HTML elements.
-The data-* attribute consist of two parts:
-The attribute name should not contain any uppercase letters, and must be at least one 
-character long after the prefix "data-". The attribute value can be any string
