@@ -90,3 +90,7 @@ button {
 I refered to this video https://www.youtube.com/watch?v=Y-GkMjUZsmM&t=751s
 for the CSS. 
 */
+
+.test {
+  border: solid 2px red;
+}
