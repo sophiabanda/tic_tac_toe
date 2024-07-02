@@ -5,27 +5,29 @@ function Square() {
     alert('Clicked!');
   }
 
-  return <button onClick={handleClick}>X</button>;
+  return (
+    <button className="cell" onClick={handleClick}>
+      X
+    </button>
+  );
 }
 
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   return (
     <>
-      <div>
-        <Square />
-        <Square />
-        <Square />
-      </div>
-      <div>
-        <Square />
-        <Square />
-        <Square />
-      </div>
-      <div>
-        <Square />
-        <Square />
-        <Square />
+      <div className="container">
+        <div className="board">
+          <Square />
+          <Square />
+          <Square />
+          <Square />
+          <Square />
+          <Square />
+          <Square />
+          <Square />
+          <Square />
+        </div>
       </div>
     </>
   );
