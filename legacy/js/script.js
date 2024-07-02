@@ -20,10 +20,6 @@ const winningCombinations = [
 
 //STATE VARIABLES------------------STATE VARIABLES------------------STATE VARIABLES------------------STATE VARIABLES------------------
 
-export default function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-}
-
 let board;
 let turn;
 let winner;
