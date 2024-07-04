@@ -8,7 +8,7 @@
     "start": "webpack-dev-server .",
     "build": "Webpack .",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d public"
   },
   "keywords": [],
   "author": "",
