@@ -33,8 +33,6 @@
 }
 
 .board {
-  width: 100vw;
-  height: 50vw;
   display: grid;
   justify-content: center;
   align-content: center;
