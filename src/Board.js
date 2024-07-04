@@ -20,6 +20,10 @@ export default function Board() {
     status = `It's ${isXNext ? 'X' : 'O'}'s turn`;
   }
 
+  function reset() {
+    setSquares(Array(9).fill(null));
+  }
+
   function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) return;
     if (isXNext) {
@@ -46,6 +50,9 @@ export default function Board() {
           <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
           <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
         </div>
+        <button onClick={() => reset()} id="button">
+          Reset
+        </button>
       </div>
     </>
   );

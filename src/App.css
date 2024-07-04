@@ -19,11 +19,13 @@
 .container {
   display: flex;
   flex-flow: column wrap;
+  align-items: center;
+  gap: 10px;
 }
 
 #game-status {
   border: 2px solid;
-  margin: 50px auto;
+  margin-top: 50px;
   width: 50%;
   padding: 10px;
   text-align: center;
@@ -44,6 +46,22 @@
 #board {
   font-size: 70px;
   text-align: center;
+}
+
+button {
+  width: 12vw;
+  align-items: center;
+  border-radius: 0;
+  background-color: white;
+  border: solid 2px black;
+  cursor: pointer;
+  resize: both;
+  text-align: center;
+}
+
+#button {
+  box-shadow: 5px 5px 5px gray;
+  margin-top: 25px;
 }
 
 .cell {
