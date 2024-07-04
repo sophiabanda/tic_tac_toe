@@ -12,18 +12,23 @@ export default function Board() {
   const [isXNext, setIsXNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
-  function handleClick() {
+  const nextSquares = squares.slice();
+
+  function handleClick(i) {
+    if (squares[i]) return;
     if (isXNext) {
-      setSquares('X');
+      nextSquares[i] = 'X';
     } else {
-      setSquares('O');
+      nextSquares[i] = 'O';
     }
+    setSquares(nextSquares);
     setIsXNext(!isXNext);
   }
 
   return (
     <>
       <div className="container">
+        <h1 id="game-status">Value</h1>
         <div className="board">
           <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
           <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
