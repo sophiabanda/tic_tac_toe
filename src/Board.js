@@ -8,9 +8,11 @@ function Square({ value, onSquareClick }) {
   );
 }
 
+const initialSquares = Array(9).fill(null);
+
 export default function Board() {
   const [isXNext, setIsXNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [squares, setSquares] = useState(initialSquares);
   const nextSquares = squares.slice();
   const winner = calculateWinner(squares);
   let status;
@@ -21,7 +23,7 @@ export default function Board() {
   }
 
   function reset() {
-    setSquares(Array(9).fill(null));
+    setSquares(initialSquares);
   }
 
   function handleClick(i) {
