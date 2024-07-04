@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
   return (
-    <button className="cell" onClick={onSquareClick}>
+    <button id="board" className="cell" onClick={onSquareClick}>
       {value}
     </button>
   );
@@ -11,11 +11,17 @@ function Square({ value, onSquareClick }) {
 export default function Board() {
   const [isXNext, setIsXNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
-
   const nextSquares = squares.slice();
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = `${winner} is the winner!!!`;
+  } else {
+    status = `It's ${isXNext ? 'X' : 'O'}'s turn`;
+  }
 
   function handleClick(i) {
-    if (squares[i]) return;
+    if (squares[i] || calculateWinner(squares)) return;
     if (isXNext) {
       nextSquares[i] = 'X';
     } else {
@@ -28,7 +34,7 @@ export default function Board() {
   return (
     <>
       <div className="container">
-        <h1 id="game-status">Value</h1>
+        <h1 id="game-status">{status}</h1>
         <div className="board">
           <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
           <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -56,6 +62,7 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6],
   ];
+
   for (let i = 0; i < possibleCombos.length; i++) {
     const [a, b, c] = possibleCombos[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
