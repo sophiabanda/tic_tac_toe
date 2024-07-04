@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import Board from './Board';
 
 const App = () => {
-  return <div>This was made from scratch! Hello, world!</div>;
+  return <Board />;
 };
 
 export default App;
